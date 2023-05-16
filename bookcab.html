@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book a Cab</title>
+</head>
+<style>
+body {
+    background-image: url('back1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+
+</style>
+<body align="center">
+	<h1>Book a Cab</h1>
+	<form action="process_booking.php" method="POST">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br><br>
+		<label for="phone">Phone:</label>
+		<input type="tel" id="phone" name="phone" required><br><br>
+		<label for="adhar" >AdharNumber:</label>
+		<input type="text" id="adhar" name="adhar" required><br><br>
+		<label for="pickup">Pickup Location:</label>
+		<input type="text" id="pickup" name="pickup" required><br><br>
+		<label for="dropoff">Drop-off Location:</label>
+		<input type="text" id="dropoff" name="dropoff" required><br><br>
+		<label for="date">Pickup Date:</label>
+		<input type="date" id="date" name="date" required><br><br>
+		<label for="time">Pickup Time:</label>
+		<input type="time" id="time" name="time" required><br><br>
+		<label for="passengers">Number of Passengers:</label>
+		<input type="number" id="passengers" name="passengers" min="1" max="6" required><br><br>
+		<label for="vehicle">Vehicle Number:</label>
+		<input type="text" id="vehicle" name="vehicle"  readonly><br><br>
+		<label for="hours">Number of Hours:</label>
+		<input type="number" id="hours" name="hours" min="1" max="24" required><br><br>
+		<label for="amount">Amount Charged (in INR):</label>
+		<input type="number" id="amount" name="amount" readonly><br><br>
+		<button type="button" onclick="calculateAmount()">Calculate Amount</button>
+		<input type="submit" value="Book Now">
+	</form>
+	<script>
+		function calculateAmount() {
+    
+			var urlParams = new URLSearchParams(window.location.search);
+   			 var hourlyRate = urlParams.get('hourlyRate');
+    		var vehicle = urlParams.get('vehicle');
+			console.log(vehicle);
+    		document.getElementById("vehicle").value = vehicle; // Set the value of the vehicle input field
+    		var hours = document.getElementById("hours").value;
+    		var amount = hours * hourlyRate;
+    		document.getElementById("amount").value = amount;
+}
+	</script>
+</body>
+</html>
